@@ -6,7 +6,7 @@ public class User implements Serializable{
 	
 	private static final long serialVersionUID = 6650698410091559879L;
 	
-	private int id;
+	private int uid;
 	private String sid;
 	private long sns_id;
 	private String nickname;
@@ -20,12 +20,12 @@ public class User implements Serializable{
 	private int blueegg_count;
 	
 	
-	public void setId(int id){
-		this.id = id;
+	public void setId(int uid){
+		this.uid = uid;
 	}
 	
 	public int getId(){
-		return this.id;
+		return this.uid;
 	}
 	
 	public void setSid(String sid){

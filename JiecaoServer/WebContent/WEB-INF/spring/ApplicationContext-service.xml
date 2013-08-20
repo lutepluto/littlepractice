@@ -6,4 +6,8 @@
 	<bean id="userService" class="jiecao.server.service.impl.UserServiceImpl">
 		<property name="userMapper" ref="userMapper"/>
 	</bean>
+	
+	<bean id="liveImageService" class="jiecao.server.service.impl.LiveImageServiceImpl">
+		<property name="liveImageMapper" ref="liveImageMapper" />
+	</bean>
 </beans>

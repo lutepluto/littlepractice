@@ -46,16 +46,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateUserSid(User user) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		this.userMapper.updateUserSid(user);
 	}
 
 }

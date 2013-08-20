@@ -7,18 +7,18 @@
 	<cache />
 	
 	<select id="getUserBySnsIdAndType" resultType="jiecao.server.domain.User">
-		SELECT * FROM jiecao_user WHERE sns_id = #{sns_id} AND sns_type = #{sns_type}
+		SELECT * FROM user WHERE sns_id = #{sns_id} AND sns_type = #{sns_type}
 	</select>
 	
 	<insert id="insertUser" parameterType="jiecao.server.domain.User" 
-		useGeneratedKeys="true">
-		INSERT INTO jiecao_user (sid,sns_id,nickname,description,profile_image_url,gender,user_type,
+		useGeneratedKeys="true" keyProperty="uid">
+		INSERT INTO user (sid,sns_id,nickname,description,profile_image_url,gender,user_type,
 		sns_type) values (#{sid},#{sns_id},#{nickname}, #{description},#{profile_image_url},
 		#{gender},#{user_type},#{sns_type})
 	</insert>
 	
 	<update id="updateUserSid" parameterType="jiecao.server.domain.User">
-		UPDATE jiecao_user set
+		UPDATE user set
 			sid = #{sid}
 		WHERE id = #{id}
 	</update>

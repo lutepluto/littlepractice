@@ -12,4 +12,6 @@ public interface UserService {
 	
 	void updateUserSid(User user);
 	
+	User getUserBySid(String sid);
+	
 }

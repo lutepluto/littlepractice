@@ -23,4 +23,8 @@
 		WHERE id = #{id}
 	</update>
 	
+	<select id="getUserBySid" parameterType="String" resultType="jiecao.server.domain.User">
+		SELECT * FROM user WHERE sid = #{sid}
+	</select>
+	
 </mapper>

@@ -7,6 +7,7 @@ import jiecao.server.service.LiveImageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,25 +15,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Lutepluto
- * ¿Í»§¶Ë·¢ËÍµÄjsonÊı¾İ¸ñÊ½Îª£º
+ * å®¢æˆ·ç«¯å‘é€jsonæ•°æ®æ ¼å¼ï¼š
  * {
- * 	"currentTimeStamp":${ÉÏ´Î»ñÈ¡Ö±²¥Í¼Æ¬Ê±µÃµ½µÄÍ¼Æ¬µÄtimestamp}
+ * 	"currentTimeStamp":${ä¸Šæ¬¡æ¥æ”¶åˆ°çš„å›¾ç‰‡çš„timestamp}
  * }
- * ·şÎñÆ÷»ñµÃÇëÇóºó²éÑ¯×îĞÂÍ¼Æ¬µÄtimestamp£¬Èç¹û×îĞÂÍ¼Æ¬µÄtimestamp
- * ´óÓÚ¿Í»§¶Ë´«ËÍ¹ıÀ´µÄtimestamp£¬Ôò±íÃ÷·şÎñÆ÷´æÔÚÓĞ×îĞÂµÄÍ¼Æ¬£¬ĞèÒª·¢
- * ËÍ¿Í»§¶Ë£¬·µ»Ø¿Í»§¶ËµÄjsonÊı¾İ¸ñÊ½Îª£º
+ *
+ * æœåŠ¡å™¨è¿”å›å®¢æˆ·ç«¯æˆåŠŸçš„jsonæ•°æ®æ ¼å¼
  * {
- * 	"type":xxx  //1:ÕıÔÚÖ±²¥£¬2:Ö±²¥Ô¤¸æ
- * 	"imgUrl":${url}	//Í¼Æ¬url
+ * 	"type":xxx  //1:æ­£åœ¨ç›´æ’­ï¼Œ2:ç›´æ’­é¢„å‘Š
+ * 	"imgUrl":${url}	//å›¾ç‰‡url
  * }
- * Èç¹ûÃ»ÓĞ×îĞÂµÄÍ¼Æ¬£¬Ôò·µ»ØµÄjsonÊı¾İ¸ñÊ½Îª£º
+ * æœåŠ¡å™¨è¿”å›å®¢æˆ·ç«¯å¤±è´¥çš„jsonæ•°æ®æ ¼å¼
  * {
  * 	"success":"false"
  * }
- * ·µ»ØµÄjsonÊı¾İ¾ùÎª×Ö·û´®
  */
 
 @Controller
+@RequestMapping(value="/index")
 public class ImageController {
 	
 	@Autowired
@@ -41,7 +41,7 @@ public class ImageController {
 	
 	
 	
-	@RequestMapping(method=RequestMethod.POST, value="/index/main")
+	@RequestMapping(method=RequestMethod.POST, value="/main")
 	@ResponseBody
 	public HashMap<String, String> getNewestLiveImage(@RequestBody HashMap<String, Long> order){
 		
@@ -56,6 +56,12 @@ public class ImageController {
 			response.put("success", "false");
 		}
 		return response;
+	}
+	
+	@ExceptionHandler(RuntimeException.class)
+	@ResponseBody
+	public String runtimeExceptionHandler(RuntimeException runtimeException){
+		return runtimeException.getMessage();
 	}
 	
 }

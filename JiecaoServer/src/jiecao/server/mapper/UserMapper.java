@@ -13,6 +13,6 @@ public interface UserMapper {
 	
 	public boolean updateUserSid(User user);
 	
-	
+	public User getUserBySid(@Param("sid") String sid);
 	
 }

@@ -19,7 +19,7 @@ public class LiveImageServiceImpl implements LiveImageService {
 	@Override
 	public LiveImage getNewestLiveImage(long timestamp) {
 		LiveImage liveImage = this.liveImageMapper.getNewestLiveImage();
-		System.out.println("return img: " + liveImage.getImage_id());
+		//System.out.println("return img: " + liveImage.getImage_id());
 		if(timestamp >= liveImage.getImage_timestamp())
 			return null;
 		else 

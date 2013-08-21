@@ -48,5 +48,9 @@ public class UserServiceImpl implements UserService {
 	public void updateUserSid(User user) {
 		this.userMapper.updateUserSid(user);
 	}
+	
+	public User getUserBySid(String sid){
+		return this.userMapper.getUserBySid(sid);
+	}
 
 }

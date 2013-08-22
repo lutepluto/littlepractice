@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @author Lutepluto
  * 客户端发送json数据格式：
  * {
  * 	"currentTimeStamp":${上次接收到的图片的timestamp}
@@ -29,6 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * {
  * 	"success":"false"
  * }
+ * @author Lutepluto
+ * 
  */
 
 @Controller

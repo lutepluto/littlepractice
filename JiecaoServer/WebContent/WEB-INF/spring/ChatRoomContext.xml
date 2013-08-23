@@ -5,11 +5,7 @@
 	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean id="userService" class="jiecao.server.service.impl.UserServiceImpl">
-		<property name="userMapper" ref="userMapper"/>
+	<bean id="webSocketServer" class="jiecao.chat.websocket.WebSocketServer" >
 	</bean>
 	
-	<bean id="liveImageService" class="jiecao.server.service.impl.LiveImageServiceImpl">
-		<property name="liveImageMapper" ref="liveImageMapper" />
-	</bean>
 </beans>

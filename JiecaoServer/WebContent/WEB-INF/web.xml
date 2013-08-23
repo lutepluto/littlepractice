@@ -2,15 +2,22 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>JiecaoRadio</display-name>
   
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>/WEB-INF/spring/ApplicationContext.xml</param-value>
+  </context-param>
+  
+  <listener>
+	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
   <servlet>
-	  <servlet-name>jiecaoServer</servlet-name>
+	  <servlet-name>JiecaoServer</servlet-name>
 	  <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 	  <init-param>
 	      <param-name>contextConfigLocation</param-name>
 	      <param-value>
-	      	/WEB-INF/jiecaoServer-servlet.xml,
-	      	/WEB-INF/mybatis/mybatis-context.xml,
-	      	/WEB-INF/spring/ApplicationContext-service.xml
+	      	/WEB-INF/spring/JiecaoServerContext.xml
 	      </param-value>
 	  </init-param>
 	  <load-on-startup>1</load-on-startup>
@@ -19,11 +26,11 @@
   <servlet>
   	<servlet-name>ChatInitServlet</servlet-name>
   	<servlet-class>jiecao.chat.servlet.ChatInitServlet</servlet-class>
-  	<load-on-startup>2</load-on-startup>
+  	<load-on-startup>3</load-on-startup>
   </servlet>
   
   <servlet-mapping>
-  	  <servlet-name>jiecaoServer</servlet-name>
+  	  <servlet-name>JiecaoServer</servlet-name>
   	  <url-pattern>/</url-pattern>
   </servlet-mapping>
 </web-app>

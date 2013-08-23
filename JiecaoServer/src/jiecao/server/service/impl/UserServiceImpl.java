@@ -6,7 +6,6 @@ import jiecao.server.service.UserService;
 
 public class UserServiceImpl implements UserService {
 	
-	
 	private UserMapper userMapper;
 	
 	public void setUserMapper(UserMapper userMapper){

@@ -9,15 +9,15 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
-public class DiscardServer {
+public class DiscardServer implements Runnable{
 	
 	private int port;
 	
 	public DiscardServer(){
-		this.port = 8080;
+		this.port = 8089;
 	}
 	
-	public void run() throws Exception{
+	public void run(){
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try{
@@ -31,9 +31,10 @@ public class DiscardServer {
 			})
 			.option(ChannelOption.SO_BACKLOG, 128)
 			.childOption(ChannelOption.SO_KEEPALIVE, true);
-			
 			ChannelFuture f = b.bind(port).sync();
 			f.channel().closeFuture().sync();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}finally{
 			workerGroup.shutdownGracefully();
 			bossGroup.shutdownGracefully();
@@ -45,7 +46,7 @@ public class DiscardServer {
 		if(args.length > 0){
 			port = Integer.parseInt(args[0]);
 		}else{
-			port = 8080;
+			port = 8089;
 		}
 		
 		new DiscardServer().run();

@@ -25,7 +25,9 @@ public class ChatInitServlet extends HttpServlet {
 //			throw new ServletException();
 //		}
 		try{
-			new DiscardServer().run();
+			Runnable server = new DiscardServer();
+			Thread t = new Thread(server);
+			t.start();
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}

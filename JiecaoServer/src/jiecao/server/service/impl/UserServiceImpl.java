@@ -1,5 +1,7 @@
 package jiecao.server.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import jiecao.server.domain.User;
 import jiecao.server.mapper.UserMapper;
 import jiecao.server.service.UserService;
@@ -20,21 +22,16 @@ public class UserServiceImpl implements UserService {
 	public User getUserBySnsIdAndType(String sns_type, long sns_id) {
 		return userMapper.getUserBySnsIdAndType(sns_type, sns_id);
 	}
-
+	
 	@Override
-	public boolean insertUser(User user) {
-		User u = null;
-		u = this.getUserBySnsIdAndType(user.getSns_type(), user.getSns_id());
-		if(u != null ){
-			if(u.getSns_id() != user.getSns_id()){
-				this.updateUserSid(user);
-			}
-		}else{
-			int result = userMapper.insertUser(user);
-			if(result == 0)
-				return false;
+	public boolean insertUser(User user){
+		
+		int isSuccess = userMapper.insertUser(user);
+		if(isSuccess == 1){
+			return true;
 		}
-		return true;
+		return false;
+		
 	}
 
 	@Override
@@ -50,6 +47,28 @@ public class UserServiceImpl implements UserService {
 	
 	public User getUserBySid(String sid){
 		return this.userMapper.getUserBySid(sid);
+	}
+	
+	@Override
+	public User getUserByUid(int uid){
+		return userMapper.getUserByUid(uid);
+	}
+	
+	@Override
+	public boolean userLogin(User user) {
+		User u = null;
+		System.out.println("---000");
+		u = this.getUserBySnsIdAndType(user.getSns_type(), user.getSns_id());
+		if(u != null ){
+			if(u.getSid() != user.getSid()){
+				this.updateUserSid(user);
+			}
+		}else{
+			int result = userMapper.insertUser(user);
+			if(result == 0)
+				return false;
+		}
+		return true;
 	}
 
 }

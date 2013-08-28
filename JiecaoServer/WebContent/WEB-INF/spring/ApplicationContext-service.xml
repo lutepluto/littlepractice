@@ -9,7 +9,11 @@
 		<property name="userMapper" ref="userMapper"/>
 	</bean>
 	
-	<bean id="liveImageService" class="jiecao.server.service.impl.LiveImageServiceImpl">
-		<property name="liveImageMapper" ref="liveImageMapper" />
+	<bean id="imageService" class="jiecao.server.service.impl.ImageServiceImpl">
+		<property name="imageMapper" ref="imageMapper" />
+	</bean>
+	
+	<bean id="programService" class="jiecao.server.service.impl.ProgramServiceImpl">
+		<property name="programMapper" ref="programMapper" />
 	</bean>
 </beans>

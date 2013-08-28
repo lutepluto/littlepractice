@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jiecao.server.mapper.ProgramMapper">
+
+	<cache />
+	
+	<select id="getLiveProgram" parameterType="String"
+	 	resultType="jiecao.server.domain.Program">
+		SELECT * FROM program where program_stime &lt; #{currentTimeString}
+			 and program_etime &gt; #{currentTImeString}
+	</select>
+	
+	<select id="getUpcomingProgram" parameterType="String"
+		resultType="jiecao.server.domain.Program">
+		SELECT * FROM program where program_stime = 
+			(SELECT MIN(program_stime) FROM program where program_stime &gt; #{currentTimeString})
+	</select>
+	
+</mapper>

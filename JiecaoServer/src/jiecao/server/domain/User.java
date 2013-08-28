@@ -20,11 +20,11 @@ public class User implements Serializable{
 	private int blueegg_count;
 	
 	
-	public void setId(int uid){
+	public void setUid(int uid){
 		this.uid = uid;
 	}
 	
-	public int getId(){
+	public int getUid(){
 		return this.uid;
 	}
 	

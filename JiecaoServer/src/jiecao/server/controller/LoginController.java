@@ -1,10 +1,14 @@
 package jiecao.server.controller;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import jiecao.server.domain.Image;
 import jiecao.server.domain.User;
+import jiecao.server.service.ImageService;
 import jiecao.server.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +25,38 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private ImageService imageService;
+	
+	@Autowired
+	private ImageService liveImageService;
+	
 	@RequestMapping(method=RequestMethod.POST, value="/login")
 	@ResponseBody
 	public Object login(/*HttpSession httpSession,*/@RequestBody User user){
-		HashMap<String, String> response = new HashMap<String, String>();
-		boolean success = userService.insertUser(user);
-		if(success){
+		
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		boolean isAuthenticated = userService.userLogin(user);
+		if(isAuthenticated){
+
 			User u = userService.getUserBySnsIdAndType(user.getSns_type(), user.getSns_id());
-			response.put("success", "true");
+			response.put("status", 0);
+			response.put("uid", u.getUid());
 			response.put("sid", u.getSid());
-			response.put("userType", String.valueOf(u.getUser_type()));
-			//httpSession.setAttribute("user", u);
+			
+			//List<Image> selections = selectionImageService.getSelectionImageList(); 
+			//response.put("selections", selections);
+			
+			//Image live = liveImageService.getNewestLiveImage(0);
+			//response.put("live", live);
+			
 		}else{
-			response.put("success", "false");
+			response.put("status", 1);
+			response.put("uid", null);
+			response.put("sid", null);
+			response.put("selections", null);
+			response.put("live", null);
 		}
 		return response;
 	}

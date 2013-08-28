@@ -21,15 +21,11 @@ public class RestfulTest {
 	@Autowired
 	private UserMapper userMapper;
 	
-	@RequestMapping(method=RequestMethod.GET, value="/test/{id}")
+	@RequestMapping(method=RequestMethod.GET, value="/test/{uid}")
 	@ResponseBody
-	public User getById(@PathVariable int id){
-		User u = new User();
-		u.setId(id);
-		u.setNickname("asdawdawd");
-		u.setSns_id(1231231L);
-		u.setSns_type("adawdjklawjdl");
-		return u;
+	public User getById(@PathVariable int uid){
+		User user = userMapper.getUserByUid(uid);
+		return user;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/test")

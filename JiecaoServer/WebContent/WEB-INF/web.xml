@@ -26,8 +26,9 @@
   <servlet>
   	<servlet-name>ChatInitServlet</servlet-name>
   	<servlet-class>jiecao.chat.servlet.ChatInitServlet</servlet-class>
-  	<load-on-startup>3</load-on-startup>
+  	<load-on-startup>2</load-on-startup>
   </servlet>
+  
   
   <servlet-mapping>
   	  <servlet-name>JiecaoServer</servlet-name>

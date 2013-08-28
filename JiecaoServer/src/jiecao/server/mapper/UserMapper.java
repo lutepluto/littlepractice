@@ -15,4 +15,6 @@ public interface UserMapper {
 	
 	public User getUserBySid(@Param("sid") String sid);
 	
+	public User getUserByUid(@Param("uid") int uid);
+	
 }

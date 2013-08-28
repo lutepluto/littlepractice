@@ -14,4 +14,7 @@ public interface UserService {
 	
 	User getUserBySid(String sid);
 	
+	User getUserByUid(int uid);
+	
+	boolean userLogin(User user);
 }

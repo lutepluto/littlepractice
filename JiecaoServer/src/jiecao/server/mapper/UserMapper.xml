@@ -20,11 +20,14 @@
 	<update id="updateUserSid" parameterType="jiecao.server.domain.User">
 		UPDATE user set
 			sid = #{sid}
-		WHERE id = #{id}
+		WHERE uid = #{uid}
 	</update>
 	
 	<select id="getUserBySid" parameterType="String" resultType="jiecao.server.domain.User">
 		SELECT * FROM user WHERE sid = #{sid}
 	</select>
 	
+	<select id="getUserByUid" parameterType="int" resultType="jiecao.server.domain.User">
+		SELECT * FROM user WHERE uid = #{uid}
+	</select>
 </mapper>

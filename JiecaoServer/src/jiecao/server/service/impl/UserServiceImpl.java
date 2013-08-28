@@ -1,7 +1,5 @@
 package jiecao.server.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import jiecao.server.domain.User;
 import jiecao.server.mapper.UserMapper;
 import jiecao.server.service.UserService;

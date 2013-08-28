@@ -1,12 +1,8 @@
 package jiecao.server.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import jiecao.server.domain.Image;
 import jiecao.server.domain.User;
 import jiecao.server.service.ImageService;
 import jiecao.server.service.UserService;

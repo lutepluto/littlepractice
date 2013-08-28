@@ -12,7 +12,6 @@ import jiecao.server.service.ProgramService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,8 +50,10 @@ public class InfoController {
 			
 		//直播预告图片
 		Image upcomingImage = null;
-		if(upcomingProgram != null)
-			this.imageService.getUpcomingImage(upcomingProgram.getProgram_id());
+		if(upcomingProgram != null){
+			
+			upcomingImage = this.imageService.getUpcomingImage(upcomingProgram.getProgram_id());
+		}
 		
 		//往期精选图片集合
 		List<Image> selections = this.imageService.getSelectionImageList();

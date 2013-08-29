@@ -13,11 +13,14 @@
 		        
     <mvc:annotation-driven>    
     	<mvc:message-converters>
+    		<bean id="messageConverter" class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
     		<bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
     			<property name="supportedMediaTypes" value="application/json" />  	
     		</bean>
     	</mvc:message-converters>
     </mvc:annotation-driven>
+    
+    
    	
     <context:component-scan base-package="jiecao.server.controller" />
     

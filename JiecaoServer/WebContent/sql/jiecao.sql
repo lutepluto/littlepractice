@@ -16,30 +16,111 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `live_image`
+-- Table structure for table `image`
 --
 
-DROP TABLE IF EXISTS `live_image`;
+DROP TABLE IF EXISTS `image`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `live_image` (
+CREATE TABLE `image` (
   `image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `image_pid` int(11) NOT NULL,
   `image_url` varchar(500) NOT NULL,
-  `image_type` int(11) NOT NULL,
   `image_name` varchar(100) NOT NULL,
   `image_timestamp` bigint(20) NOT NULL,
-  PRIMARY KEY (`image_id`)
+  `image_status` int(11) NOT NULL,
+  PRIMARY KEY (`image_id`),
+  KEY `FK_image_program_idx` (`image_pid`),
+  CONSTRAINT `FK_image_program` FOREIGN KEY (`image_pid`) REFERENCES `program` (`program_id`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `image`
+--
+
+LOCK TABLES `image` WRITE;
+/*!40000 ALTER TABLE `image` DISABLE KEYS */;
+INSERT INTO `image` VALUES (4,1,'/program/','直播图3.png',1377677753408,1),(5,1,'/program/','预告图3.png',1377677753408,0),(6,2,'/program/','精选图1.png',1377677743408,2),(7,1,'/program/','精选图2.png',1377677723408,2);
+/*!40000 ALTER TABLE `image` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `notify_img`
+--
+
+DROP TABLE IF EXISTS `notify_img`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notify_img` (
+  `notify_img_id` int(11) NOT NULL AUTO_INCREMENT,
+  `notify_img_url` varchar(500) NOT NULL,
+  `notify_img_name` varchar(100) NOT NULL,
+  `notify_img_timestamp` bigint(20) NOT NULL,
+  PRIMARY KEY (`notify_img_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notify_img`
+--
+
+LOCK TABLES `notify_img` WRITE;
+/*!40000 ALTER TABLE `notify_img` DISABLE KEYS */;
+/*!40000 ALTER TABLE `notify_img` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `program`
+--
+
+DROP TABLE IF EXISTS `program`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `program` (
+  `program_id` int(11) NOT NULL AUTO_INCREMENT,
+  `program_name` varchar(100) NOT NULL,
+  `program_description` varchar(500) NOT NULL,
+  `program_stime` time NOT NULL,
+  `program_etime` time NOT NULL,
+  PRIMARY KEY (`program_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `live_image`
+-- Dumping data for table `program`
 --
 
-LOCK TABLES `live_image` WRITE;
-/*!40000 ALTER TABLE `live_image` DISABLE KEYS */;
-INSERT INTO `live_image` VALUES (1,'/liveimage/',1,'直播图3.png',1376986034614),(2,'/liveimage',1,'直播图2.png',1376985616481);
-/*!40000 ALTER TABLE `live_image` ENABLE KEYS */;
+LOCK TABLES `program` WRITE;
+/*!40000 ALTER TABLE `program` DISABLE KEYS */;
+INSERT INTO `program` VALUES (1,'有缘千里来交配','来交配来交配来交配来交配','19:05:00','20:00:00'),(2,'姐是老中医','老中医老中医老中医老中医','21:00:00','22:00:00');
+/*!40000 ALTER TABLE `program` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sale_img`
+--
+
+DROP TABLE IF EXISTS `sale_img`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sale_img` (
+  `sale_img_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sale_img_url` varchar(500) NOT NULL,
+  `sale_img_name` varchar(100) NOT NULL,
+  `sale_img_timestamp` bigint(20) NOT NULL,
+  `sale_img_type` int(11) NOT NULL,
+  PRIMARY KEY (`sale_img_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sale_img`
+--
+
+LOCK TABLES `sale_img` WRITE;
+/*!40000 ALTER TABLE `sale_img` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sale_img` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -85,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-08-21 10:25:31
+-- Dump completed on 2013-08-28 17:24:59

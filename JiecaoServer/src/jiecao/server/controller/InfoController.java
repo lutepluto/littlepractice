@@ -1,17 +1,27 @@
 package jiecao.server.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import jiecao.server.domain.Image;
 import jiecao.server.domain.Program;
 import jiecao.server.service.ImageService;
 import jiecao.server.service.ProgramService;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -64,6 +74,26 @@ public class InfoController {
 		response.put("liveImage", liveImage);
 		response.put("selections", selections);
 		return response;
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/image/{imgName}.{extension:[a-z]}")
+	@ResponseBody
+	public ResponseEntity<String> getImagebyName(@PathVariable("imgName") String imgName, 
+			@PathVariable("extension") String extension, HttpServletRequest request){
+		String ctxPath = request.getSession().getServletContext().getRealPath("/");
+		String imgPath = ctxPath + "resources\\program\\" + imgName + "." + extension;
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_PNG);
+		headers.setContentDispositionFormData("attachment", imgName+".png");
+		ResponseEntity<String> re = null;
+		try{
+			re = new ResponseEntity<String>(FileUtils.readFileToString(new File(imgPath)),
+				headers, HttpStatus.CREATED);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		return re;
 	}
 	
 	@ExceptionHandler(RuntimeException.class)

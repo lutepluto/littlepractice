@@ -57,6 +57,12 @@ public class RestfulTest {
 		return response;
 	}
 	
+	@RequestMapping(value="/")
+	public String getImage(){
+		System.out.println("I've been invoked!");
+		return "index";
+	}
+	
 	@ExceptionHandler(RuntimeException.class)
 	@ResponseBody
 	public String runtimeExceptionHandler(RuntimeException runtimeException){

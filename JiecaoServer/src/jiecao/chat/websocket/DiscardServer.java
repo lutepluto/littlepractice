@@ -13,11 +13,21 @@ public class DiscardServer implements Runnable{
 	
 	private int port;
 	
-	public DiscardServer(){
-		this.port = 8089;
+//	public DiscardServer(){
+//		this.port = 8089;
+//	}
+	
+	public void setPort(int port){
+		this.port = port;
+	}
+	
+	public int getPort(){
+		return this.port;
 	}
 	
 	public void run(){
+		System.out.println("Start to run");
+		
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try{
@@ -31,8 +41,11 @@ public class DiscardServer implements Runnable{
 			})
 			.option(ChannelOption.SO_BACKLOG, 128)
 			.childOption(ChannelOption.SO_KEEPALIVE, true);
+			System.out.println("waiting to connected");
 			ChannelFuture f = b.bind(port).sync();
 			f.channel().closeFuture().sync();
+			
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}finally{

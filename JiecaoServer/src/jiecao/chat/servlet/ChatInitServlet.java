@@ -6,6 +6,11 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
 import jiecao.chat.websocket.DiscardServer;
 import jiecao.chat.websocket.WebSocketServer;
 
@@ -25,7 +30,9 @@ public class ChatInitServlet extends HttpServlet {
 //			throw new ServletException();
 //		}
 		try{
-			Runnable server = new DiscardServer();
+			//Runnable server = new DiscardServer();
+			ApplicationContext ctx = new ClassPathXmlApplicationContext("/jiecao/chat/resources/ChatRoomContext.xml");
+			Runnable server = (DiscardServer)ctx.getBean(DiscardServer.class);
 			Thread t = new Thread(server);
 			t.start();
 		}catch(Exception e){

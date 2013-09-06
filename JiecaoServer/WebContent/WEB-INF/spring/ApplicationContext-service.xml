@@ -16,4 +16,8 @@
 	<bean id="programService" class="jiecao.server.service.impl.ProgramServiceImpl">
 		<property name="programMapper" ref="programMapper" />
 	</bean>
+	
+	<bean id="itemService" class="jiecao.server.service.impl.ItemServiceImpl">
+		<property name="itemMapper" ref="itemMapper" />
+	</bean>
 </beans>

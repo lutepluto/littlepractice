@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jiecao.server.mapper.ItemMapper">
+
+	<cache />
+	
+	<select id="getLiveItemDetailInfo" 	resultMap="detailedItemResultMap">
+	 	select
+			*
+		from item i
+			inner join program p on i.item_pid = p.program_id 
+		where
+			i.item_date = #{0}
+		and
+			p.program_stime &lt; #{1}
+		and
+			p.program_etime &gt; #{1} 
+		order by
+			p.program_stime
+		limit
+			1
+	</select>
+	
+	<select id="getUpcomingItemDetailInfo" resultMap="detailedItemResultMap">
+		select
+			*
+		from item i
+			inner join program p on i.item_pid = p.program_id 
+		where
+			i.item_date = #{0}
+		and
+			p.program_stime &gt; #{1} 
+		order by
+			p.program_stime
+		limit
+			1
+	</select>
+	
+	<select id="getCollectedItems" resultMap="detailedItemResultMap">
+		select
+			*
+		from item i
+			inner join program p on i.item_pid = p.program_id 
+		where
+			i.item_collection = 1 
+	</select>
+	
+	<resultMap type="jiecao.server.domain.Item" id="detailedItemResultMap">
+		<id property="item_id" column="item_id"/>
+		<result property="item_pid" column="item_pid"/>
+		<result property="item_hid" column="item_hid"/>
+		<result property="item_listener_count" column="item_listener_count"/>
+		<result property="item_red_count" column="item_red_count"/>
+		<result property="item_blue_count" column="item_blue_count"/>
+		<result property="item_date" column="item_date"/>
+		<association property="program" javaType="jiecao.server.domain.Program">
+			<id property="program_id" column="program_id"/>
+			<result property="program_name" column="program_name"/>
+			<result property="program_description" column="program_description"/>
+			<result property="program_stime" column="program_stime"/>
+			<result property="program_etime" column="program_etime"/>
+		</association>
+	</resultMap>
+	
+</mapper>

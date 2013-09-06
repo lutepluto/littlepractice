@@ -2,13 +2,14 @@ package jiecao.server.controller;
 
 import java.util.HashMap;
 
+import jiecao.server.domain.Item;
 import jiecao.server.domain.User;
 import jiecao.server.mapper.UserMapper;
+import jiecao.server.service.ItemService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,16 +17,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
+
 public class RestfulTest {
 	
 	@Autowired
 	private UserMapper userMapper;
 	
-	@RequestMapping(method=RequestMethod.GET, value="/test/{uid}")
+	@Autowired
+	private ItemService itemService;
+	
+	@RequestMapping(method=RequestMethod.GET, value="/test")
 	@ResponseBody
-	public User getById(@PathVariable int uid){
-		User user = userMapper.getUserByUid(uid);
+	public User getById(){
+		User user = userMapper.getUserByUid(4);
 		return user;
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/test/item")
+	@ResponseBody
+	public Item getUpcomingItem(){
+		return this.itemService.getUpcomingItem();
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/test")
@@ -57,7 +68,7 @@ public class RestfulTest {
 		return response;
 	}
 	
-	@RequestMapping(value="/")
+	@RequestMapping
 	public String getImage(){
 		System.out.println("I've been invoked!");
 		return "index";

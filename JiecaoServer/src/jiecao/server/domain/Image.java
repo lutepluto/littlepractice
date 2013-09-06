@@ -7,11 +7,9 @@ public class Image implements Serializable {
 	private static final long serialVersionUID = 288417128978684683L;
 	
 	private int image_id;
-	private int image_pid;
+	private int image_iid;
 	private String image_url;
 	private String image_name;
-	private long image_timestamp;
-	private int image_status;
 	
 	public void setImage_id(int image_id){
 		this.image_id = image_id;
@@ -21,12 +19,12 @@ public class Image implements Serializable {
 		return this.image_id;
 	}
 	
-	public void setImage_pid(int image_pid){
-		this.image_pid = image_pid;
+	public void setImage_iid(int image_iid){
+		this.image_iid = image_iid;
 	}
 	
-	public int getImage_pid(){
-		return this.image_pid;
+	public int getImage_iid(){
+		return this.image_iid;
 	}
 	
 	public void setImage_url(String image_url){
@@ -43,21 +41,5 @@ public class Image implements Serializable {
 	
 	public String getImage_name(){
 		return this.image_name;
-	}
-	
-	public void setImage_timestamp(long image_timestamp){
-		this.image_timestamp = image_timestamp;
-	}
-	
-	public long getImage_timestamp(){
-		return this.image_timestamp;
-	}
-	
-	public void setImage_status(int image_status){
-		this.image_status = image_status;
-	}
-	
-	public int getImage_status(){
-		return this.image_status;
 	}
 }

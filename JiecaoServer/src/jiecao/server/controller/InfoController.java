@@ -3,7 +3,9 @@ package jiecao.server.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -11,9 +13,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import jiecao.server.domain.Image;
-import jiecao.server.domain.Program;
+import jiecao.server.domain.Item;
 import jiecao.server.service.ImageService;
-import jiecao.server.service.ProgramService;
+import jiecao.server.service.ItemService;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -41,7 +43,7 @@ public class InfoController {
 	private ImageService imageService;
 	
 	@Autowired
-	private ProgramService programService;
+	private ItemService itemService;
 	
 	//client request to get the newest program and image information
 	@RequestMapping(method=RequestMethod.GET, value="/index/main")
@@ -50,30 +52,42 @@ public class InfoController {
 		Map<String, Object> response = new HashMap<String, Object>();
 		
 		//直播节目信息
-		Program liveProgram = this.programService.getLiveProgram();
+		Item liveItem = this.itemService.getLiveItem();
 		//直播预告信息
-		Program upcomingProgram = this.programService.getUpcomingProgram();
+		Item upcomingItem = this.itemService.getUpcomingItem();
+		//往期精选节目
+		List<Item> collectedItems = this.itemService.getCollectedItemsList();
 		
 		//直播节目图片
 		Image liveImage = null;
-		if(liveProgram != null)
-			liveImage = this.imageService.getLiveImage(liveProgram.getProgram_id());
+		if(liveItem != null)
+			liveImage = this.imageService.getImageByItemId(liveItem.getItem_id());
 			
 		//直播预告图片
 		Image upcomingImage = null;
-		if(upcomingProgram != null){
-			
-			upcomingImage = this.imageService.getUpcomingImage(upcomingProgram.getProgram_id());
+		if(upcomingItem != null){
+			upcomingImage = this.imageService.getImageByItemId(upcomingItem.getItem_id());
 		}
 		
 		//往期精选图片集合
-		List<Image> selections = this.imageService.getSelectionImageList();
+		List<Image> collectedImages = null;
+		if(collectedItems != null){
+			collectedImages = new ArrayList<Image>();
+			Iterator<Item> iterator = collectedItems.iterator();
+			while(iterator.hasNext()){
+				Item item = (Item)iterator.next();
+				Image img = this.imageService.getImageByItemId(item.getItem_id());
+				collectedImages.add(img);
+			}
+		}
 		
-		response.put("upcomingProgram", upcomingProgram);
+		
+		response.put("upcomingItem", upcomingItem);
 		response.put("upcomingImage", upcomingImage);
-		response.put("liveProgram", liveProgram);
+		response.put("liveItem", liveItem);
 		response.put("liveImage", liveImage);
-		response.put("selections", selections);
+		response.put("collectedItems", collectedItems);
+		response.put("collectedImages", collectedImages);
 		return response;
 	}
 	
@@ -83,7 +97,7 @@ public class InfoController {
 		ServletContext servletContext = request.getSession().getServletContext();
 		String realPath = servletContext.getRealPath("/");
 		String fileName = imgName + "." + extension;
-		String filePath = realPath + "resources\\program\\" + fileName;
+		String filePath = realPath + "resources\\item\\" + fileName;
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Type", "image/"+extension);

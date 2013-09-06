@@ -1,7 +1,5 @@
 package jiecao.server.service.impl;
 
-import java.util.List;
-
 import jiecao.server.domain.Image;
 import jiecao.server.mapper.ImageMapper;
 import jiecao.server.service.ImageService;
@@ -19,20 +17,8 @@ public class ImageServiceImpl implements ImageService {
 	}
 
 	@Override
-	public Image getLiveImage(int image_pid) {
-		Image liveImage = this.imageMapper.getLiveImage(image_pid);
+	public Image getImageByItemId(int image_iid) {
+		Image liveImage = this.imageMapper.getImageByItemId(image_iid);
 		return liveImage;
 	}
-	
-	@Override
-	public Image getUpcomingImage(int image_pid){
-		return this.imageMapper.getUpcomingImage(image_pid);
-	}
-
-	@Override
-	public List<Image> getSelectionImageList() {
-		return this.imageMapper.getSelectionImageList();
-	}
-	
-	
 }

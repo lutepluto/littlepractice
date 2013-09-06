@@ -50,6 +50,6 @@
   
   <servlet-mapping>
   	  <servlet-name>JiecaoServer</servlet-name>
-  	  <url-pattern>/</url-pattern>
+  	  <url-pattern>/server/*</url-pattern>
   </servlet-mapping>
 </web-app>

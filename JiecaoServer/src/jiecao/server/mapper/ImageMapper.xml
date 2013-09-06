@@ -6,20 +6,8 @@
 
 	<cache />
 	
-	<select id="getLiveImage" parameterType="int" 
-		resultType="jiecao.server.domain.Image">
-		SELECT * FROM image WHERE image_pid = #{image_pid} and image_status = 1 and
-			image_timestamp = (SELECT MAX(image_timestamp) from image)
-	</select>
-	
-	<select id="getUpcomingImage" parameterType="int" 
-		resultType="jiecao.server.domain.Image">
-		SELECT * FROM image WHERE image_pid = #{image_pid} and image_status = 0 and
-			image_timestamp = (SELECT MAX(image_timestamp) from image)
-	</select>
-	
-	<select id="getSelectionImageList" resultType="jiecao.server.domain.Image">
-		SELECT * FROM image WHERE image_status = 2 
+	<select id="getImageByItemId" parameterType="int" resultType="jiecao.server.domain.Image">
+		select * from image where image_iid = #{image_iid}
 	</select>
 	
 </mapper>

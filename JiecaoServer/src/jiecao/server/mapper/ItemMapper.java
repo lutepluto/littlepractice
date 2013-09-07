@@ -10,6 +10,10 @@ public interface ItemMapper {
 	
 	public Item getUpcomingItemDetailInfo(String currentDate, String currentTime);
 	
-	public List<Item> getCollectedItems(); 
+	public List<Item> getCollectedItems();
+	
+	public int updateItemRedCount(int item_id, int count);
+	
+	public int updateItemBlueCount(int item_id, int count);
 
 }

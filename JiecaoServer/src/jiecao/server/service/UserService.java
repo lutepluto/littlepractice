@@ -17,4 +17,6 @@ public interface UserService {
 	User getUserByUid(int uid);
 	
 	boolean userLogin(User user);
+	
+	boolean updateUserRedCount(int uid, int count);
 }

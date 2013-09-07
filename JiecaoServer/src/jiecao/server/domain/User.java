@@ -16,8 +16,8 @@ public class User implements Serializable{
 	private int user_type;
 	private String sns_type;
 	private long caobi_count;
-	private int redegg_count;
-	private int blueegg_count;
+	private int red_count;
+	private int blue_count;
 	
 	
 	public void setUid(int uid){
@@ -100,19 +100,19 @@ public class User implements Serializable{
 		return this.caobi_count;
 	}
 	
-	public void setRedegg_count(int redegg_count){
-		this.redegg_count = redegg_count;
+	public void setRed_count(int red_count){
+		this.red_count = red_count;
 	}
 	
-	public int getRedegg_count(){
-		return this.redegg_count;
+	public int getRed_count(){
+		return this.red_count;
 	}
 	
-	public void setBlueegg_count(int blueegg_count){
-		this.blueegg_count = blueegg_count;
+	public void setBlue_count(int blue_count){
+		this.blue_count = blue_count;
 	}
 	
-	public int getBlueegg_count(){
-		return this.blueegg_count;
+	public int getBlue_count(){
+		return this.blue_count;
 	}
 }

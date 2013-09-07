@@ -30,4 +30,19 @@
 	<select id="getUserByUid" parameterType="int" resultType="jiecao.server.domain.User">
 		SELECT * FROM user WHERE uid = #{uid}
 	</select>
+	
+	<update id="updateUserRedCount" parameterType="int">
+		update user set
+		  red_count = red_count + #{1}
+		where 
+		  uid = #{0}
+	</update>
+	
+	<update id="updateUserBlueCount" parameterType="int">
+		update user set
+		  blue_count = blue_count + #{1}
+		where 
+		  uid = #{0}
+	</update>
+	
 </mapper>

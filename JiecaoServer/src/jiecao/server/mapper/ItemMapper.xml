@@ -64,4 +64,18 @@
 		</association>
 	</resultMap>
 	
+	<update id="updateItemRedCount">
+		update item set
+		  item_red_count = item_red_count + #{1}
+		where
+		  item_id = #{0}
+	</update>
+	
+	<update id="updateItemBlueCount">
+		update item set
+		  item_blue_count = item_blue_count + #{1}
+		where
+		  item_id = #{0}
+	</update>
+	
 </mapper>

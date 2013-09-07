@@ -69,4 +69,16 @@ public class UserServiceImpl implements UserService {
 		return true;
 	}
 
+	@Override
+	public boolean updateUserRedCount(int uid, int count) {
+		int result = this.userMapper.updateUserRedCount(uid, count);
+		
+		System.out.println("The result code is " + result);
+		
+		if(result == 1){
+			return true;
+		}
+		return false;
+	}
+	
 }

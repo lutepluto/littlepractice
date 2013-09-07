@@ -32,7 +32,7 @@ public class ChatInitServlet extends HttpServlet {
 		try{
 			//Runnable server = new DiscardServer();
 			ApplicationContext ctx = new ClassPathXmlApplicationContext("/jiecao/chat/resources/ChatRoomContext.xml");
-			Runnable server = (DiscardServer)ctx.getBean(DiscardServer.class);
+			Runnable server = (WebSocketServer)ctx.getBean(WebSocketServer.class);
 			Thread t = new Thread(server);
 			t.start();
 		}catch(Exception e){

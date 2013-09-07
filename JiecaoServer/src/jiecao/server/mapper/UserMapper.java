@@ -17,4 +17,8 @@ public interface UserMapper {
 	
 	public User getUserByUid(@Param("uid") int uid);
 	
+	public int updateUserRedCount(int uid, int count);
+	
+	public int updateUserBlueCount(int uid, int count);
+	
 }

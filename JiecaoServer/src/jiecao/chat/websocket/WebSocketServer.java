@@ -14,18 +14,26 @@ import java.util.List;
  * TODO 单例模式，后续修改为spring注入
  * @author bikao
  */
-public class WebSocketServer {
+public class WebSocketServer implements Runnable{
 	private volatile static WebSocketServer websocketServer; 
 
 	/**
 	 * TODO netty监听端口，后续改为配置文件写入
 	 */
-    private final int port = 8080;
+    private int port;
     
-    private WebSocketServer() throws Exception
-    {
-    	run();
+    public void setPort(int port){
+    	this.port = port;
     }
+    
+    public int getPort(){
+    	return this.port;
+    }
+    
+//    private WebSocketServer() throws Exception
+//    {
+//    	run();
+//    }
     
     //双重检查加锁
     public static WebSocketServer getInstance() throws Exception {
@@ -40,7 +48,7 @@ public class WebSocketServer {
     }
     
 
-    private void run() throws Exception {
+    public void run() {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -54,7 +62,9 @@ public class WebSocketServer {
             System.out.println("Open your browser and navigate to http://localhost:" + port + '/');
 
             ch.closeFuture().sync();
-        } finally {
+        }catch(InterruptedException e){
+        	e.printStackTrace();
+        }finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }

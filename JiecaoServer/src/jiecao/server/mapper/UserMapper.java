@@ -2,6 +2,7 @@ package jiecao.server.mapper;
 
 import org.apache.ibatis.annotations.*;
 
+import jiecao.server.domain.Host;
 import jiecao.server.domain.User;
 
 public interface UserMapper {
@@ -21,4 +22,5 @@ public interface UserMapper {
 	
 	public int updateUserBlueCount(int uid, int count);
 	
+	public Host getHostInfo(int hid);
 }

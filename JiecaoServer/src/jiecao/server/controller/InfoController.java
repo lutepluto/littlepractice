@@ -12,10 +12,12 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import jiecao.server.domain.Host;
 import jiecao.server.domain.Image;
 import jiecao.server.domain.Item;
 import jiecao.server.service.ImageService;
 import jiecao.server.service.ItemService;
+import jiecao.server.service.UserService;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -44,6 +46,9 @@ public class InfoController {
 	
 	@Autowired
 	private ItemService itemService;
+	
+	@Autowired
+	private UserService userSerivce;
 	
 	//client request to get the newest program and image information
 	@RequestMapping(method=RequestMethod.GET, value="/index/main")
@@ -114,6 +119,17 @@ public class InfoController {
 
 		ResponseEntity<byte[]> res = new ResponseEntity<byte[]>(data, headers, HttpStatus.OK);
 		return res;
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/host/{host_id}")
+	@ResponseBody
+	public Object getHostInfo(@PathVariable int host_id){
+		Map<String, Object> response = null;
+		
+		Host host = this.userSerivce.getHostInfoById(host_id);
+		response = new HashMap<String, Object>();
+		response.put("host", host);
+		return response;
 	}
 	
 	@ExceptionHandler(RuntimeException.class)

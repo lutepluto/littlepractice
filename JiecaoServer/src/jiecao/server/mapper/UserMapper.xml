@@ -45,4 +45,38 @@
 		  uid = #{0}
 	</update>
 	
+	<select id="getHostInfo" parameterType="int" resultMap="detailedHostResultMap">
+		select
+		  h.host_id,
+		  h.host_name,
+		  h.host_description,
+		  h.host_head_url,
+	   	  i.item_id,
+	   	  i.item_listener_count,
+	   	  i.item_red_count,
+	   	  i.item_blue_count,
+	   	  i.item_date,
+	   	  p.program_name
+		from host h
+	   	  inner join item i on item_hid = h.host_id
+	   	  inner join program p on item_pid = p.program_id
+		where h.host_id = #{0}
+	</select>
+	
+	<resultMap type="jiecao.server.domain.Host" id="detailedHostResultMap">
+		<id property="host_id" column="host_id"/>
+		<result property="host_name" column="host_name"/>
+		<result property="host_description" column="host_description"/>
+		<result property="host_head_url" column="host_head_url"/>
+		<collection property="items" ofType="jiecao.server.domain.Item">
+			<id property="item_id" column="item_id"/>
+			<result property="item_listener_count" column="item_listener_count"/>
+			<result property="item_red_count" column="item_red_count" />
+			<result property="item_blue_count" column="item_red_count"/>
+			<result property="item_date" column="item_date" />
+			<association property="program" javaType="jiecao.server.domain.Program">
+				<result property="program_name" column="program_name"/>
+			</association>
+		</collection>
+	</resultMap>
 </mapper>

@@ -1,5 +1,6 @@
 package jiecao.server.service;
 
+import jiecao.server.domain.Host;
 import jiecao.server.domain.User;
 
 public interface UserService {
@@ -19,4 +20,6 @@ public interface UserService {
 	boolean userLogin(User user);
 	
 	boolean updateUserRedCount(int uid, int count);
+	
+	Host getHostInfoById(int hid);
 }

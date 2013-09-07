@@ -1,5 +1,6 @@
 package jiecao.server.service.impl;
 
+import jiecao.server.domain.Host;
 import jiecao.server.domain.User;
 import jiecao.server.mapper.UserMapper;
 import jiecao.server.service.UserService;
@@ -79,6 +80,11 @@ public class UserServiceImpl implements UserService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public Host getHostInfoById(int hid) {
+		return this.userMapper.getHostInfo(hid);
 	}
 	
 }

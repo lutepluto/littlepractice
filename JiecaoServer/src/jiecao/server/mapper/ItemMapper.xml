@@ -78,4 +78,7 @@
 		  item_id = #{0}
 	</update>
 	
+	<update id="resetGiftCount">
+		update item set item_blue_count = 0, item_red_count = 0 where item_id = #{0}
+	</update>
 </mapper>

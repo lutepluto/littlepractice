@@ -15,5 +15,7 @@ public interface ItemMapper {
 	public int updateItemRedCount(int item_id, int count);
 	
 	public int updateItemBlueCount(int item_id, int count);
+	
+	public int resetGiftCount(int item_id);
 
 }

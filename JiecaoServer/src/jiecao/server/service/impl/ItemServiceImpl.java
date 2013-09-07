@@ -47,4 +47,5 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> getCollectedItemsList(){
 		return this.itemMapper.getCollectedItems();
 	}
+	
 }

@@ -47,4 +47,15 @@ public class GiftServiceImpl implements GiftService {
 		}
 	}
 
+	@Override
+	@Transactional(readOnly=false, propagation=Propagation.REQUIRED)
+	public boolean resetGiftCount(int iid) {
+		
+		int result = this.itemMapper.resetGiftCount(iid);
+		if(result == 1)
+			return true;
+		return false;
+	}
+	
+	
 }

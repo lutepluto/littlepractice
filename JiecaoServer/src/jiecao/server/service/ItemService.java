@@ -11,5 +11,5 @@ public interface ItemService {
 	public Item getUpcomingItem();
 	
 	public List<Item> getCollectedItemsList();
-	
+
 }

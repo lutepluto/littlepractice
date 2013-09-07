@@ -36,5 +36,18 @@ public class GiftController {
 			response.put("status", new Integer(1));
 		return response;
 	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/gift/reset/{item_id}")
+	@ResponseBody
+	public Object resetGiftCount(@PathVariable int item_id){
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		boolean isreset = this.giftService.resetGiftCount(item_id);
+		if(isreset)
+			response.put("status", new Integer(0));
+		else 
+			response.put("status", new Integer(1));
+		return response;
+	}
 
 }

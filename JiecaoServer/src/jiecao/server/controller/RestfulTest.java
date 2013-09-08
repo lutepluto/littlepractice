@@ -2,10 +2,9 @@ package jiecao.server.controller;
 
 import java.util.HashMap;
 
-import jiecao.server.domain.Item;
 import jiecao.server.domain.User;
 import jiecao.server.mapper.UserMapper;
-import jiecao.server.service.ItemService;
+import jiecao.server.service.ProgramService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,19 +23,13 @@ public class RestfulTest {
 	private UserMapper userMapper;
 	
 	@Autowired
-	private ItemService itemService;
+	private ProgramService programService;
 	
 	@RequestMapping(method=RequestMethod.GET, value="/test")
 	@ResponseBody
 	public User getById(){
 		User user = userMapper.getUserByUid(4);
 		return user;
-	}
-	
-	@RequestMapping(method=RequestMethod.GET, value="/test/item")
-	@ResponseBody
-	public Item getUpcomingItem(){
-		return this.itemService.getUpcomingItem();
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/test")

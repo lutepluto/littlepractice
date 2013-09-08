@@ -1,7 +1,9 @@
 package jiecao.server.service.impl;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
+import java.util.List;
 
 import jiecao.server.domain.Program;
 import jiecao.server.mapper.ProgramMapper;
@@ -20,20 +22,30 @@ public class ProgramServiceImpl implements ProgramService {
 	}
 	
 	@Override
-	public Program getLiveProgram() {
+	public Program getLiveItem(){
 		
-		Time currentTime = new Time(Calendar.getInstance().getTimeInMillis());
-		String currentTimeString = currentTime.toString();
+		Time time = new Time(Calendar.getInstance().getTimeInMillis());
+		Date date = new Date(Calendar.getInstance().getTimeInMillis());
+		String currentTime = time.toString();
+		String currentDate = date.toString();
 		
-		return this.programMapper.getLiveProgram(currentTimeString);
+		return this.programMapper.getLiveItemDetailInfo(currentDate, currentTime);
 	}
-
+	
 	@Override
-	public Program getUpcomingProgram() {
+	public Program getUpcomingItem() {
 		
-		Time currentTime = new Time(Calendar.getInstance().getTimeInMillis());
-		String currentTimeString = currentTime.toString();
-		return this.programMapper.getUpcomingProgram(currentTimeString);
+		Time time = new Time(Calendar.getInstance().getTimeInMillis());
+		Date date = new Date(Calendar.getInstance().getTimeInMillis());
+		String currentTime = time.toString();
+		String currentDate = date.toString();
+		
+		return this.programMapper.getUpcomingItemDetailInfo(currentDate, currentTime);
 	}
-
+	
+	@Override
+	public List<Program> getCollectedItemsList(){
+		return this.programMapper.getCollectedItems();
+	}
+	
 }

@@ -15,8 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import jiecao.server.domain.Host;
 import jiecao.server.domain.Image;
 import jiecao.server.domain.Item;
+import jiecao.server.domain.Program;
 import jiecao.server.service.ImageService;
-import jiecao.server.service.ItemService;
+import jiecao.server.service.ProgramService;
 import jiecao.server.service.UserService;
 
 import org.apache.commons.io.FileUtils;
@@ -45,7 +46,7 @@ public class InfoController {
 	private ImageService imageService;
 	
 	@Autowired
-	private ItemService itemService;
+	private ProgramService itemService;
 	
 	@Autowired
 	private UserService userSerivce;
@@ -57,42 +58,18 @@ public class InfoController {
 		Map<String, Object> response = new HashMap<String, Object>();
 		
 		//直播节目信息
-		Item liveItem = this.itemService.getLiveItem();
+		Program liveProgram = this.itemService.getLiveItem();
 		//直播预告信息
-		Item upcomingItem = this.itemService.getUpcomingItem();
+		Program upcomingProgram = this.itemService.getUpcomingItem();
 		//往期精选节目
-		List<Item> collectedItems = this.itemService.getCollectedItemsList();
+		List<Program> collectedPrograms = this.itemService.getCollectedItemsList();		
 		
-		//直播节目图片
-		Image liveImage = null;
-		if(liveItem != null)
-			liveImage = this.imageService.getImageByItemId(liveItem.getItem_id());
-			
-		//直播预告图片
-		Image upcomingImage = null;
-		if(upcomingItem != null){
-			upcomingImage = this.imageService.getImageByItemId(upcomingItem.getItem_id());
-		}
+		response.put("upcomingProgram", upcomingProgram);
 		
-		//往期精选图片集合
-		List<Image> collectedImages = null;
-		if(collectedItems != null){
-			collectedImages = new ArrayList<Image>();
-			Iterator<Item> iterator = collectedItems.iterator();
-			while(iterator.hasNext()){
-				Item item = (Item)iterator.next();
-				Image img = this.imageService.getImageByItemId(item.getItem_id());
-				collectedImages.add(img);
-			}
-		}
+		response.put("liveProgram", liveProgram);
 		
-		
-		response.put("upcomingItem", upcomingItem);
-		response.put("upcomingImage", upcomingImage);
-		response.put("liveItem", liveItem);
-		response.put("liveImage", liveImage);
-		response.put("collectedItems", collectedItems);
-		response.put("collectedImages", collectedImages);
+		response.put("collectedPrograms", collectedPrograms);
+	
 		return response;
 	}
 	

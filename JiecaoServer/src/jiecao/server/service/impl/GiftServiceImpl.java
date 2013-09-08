@@ -3,14 +3,14 @@ package jiecao.server.service.impl;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import jiecao.server.mapper.ItemMapper;
+import jiecao.server.mapper.ProgramMapper;
 import jiecao.server.mapper.UserMapper;
 import jiecao.server.service.GiftService;
 
 public class GiftServiceImpl implements GiftService {
 	
 	private UserMapper userMapper;
-	private ItemMapper itemMapper;
+	private ProgramMapper programMapper;
 
 	public UserMapper getUserMapper() {
 		return userMapper;
@@ -20,12 +20,12 @@ public class GiftServiceImpl implements GiftService {
 		this.userMapper = userMapper;
 	}
 
-	public ItemMapper getItemMapper() {
-		return itemMapper;
+	public ProgramMapper getProgramMapper() {
+		return programMapper;
 	}
 
-	public void setItemMapper(ItemMapper itemMapper) {
-		this.itemMapper = itemMapper;
+	public void setProgramMapper(ProgramMapper programMapper) {
+		this.programMapper = programMapper;
 	}
 
 	@Override
@@ -34,13 +34,13 @@ public class GiftServiceImpl implements GiftService {
 		
 		if(type.equals("red")){
 			int userResult = this.userMapper.updateUserRedCount(uid, -count);
-			int itemResult = this.itemMapper.updateItemRedCount(iid, count);
+			int itemResult = this.programMapper.updateItemRedCount(iid, count);
 			if(userResult == 1 && itemResult == 1)
 				return true;
 			return false;
 		}else{
 			int userResult = this.userMapper.updateUserBlueCount(uid, -count);
-			int itemResult = this.itemMapper.updateItemBlueCount(iid, count);
+			int itemResult = this.programMapper.updateItemBlueCount(iid, count);
 			if(userResult == 1 && itemResult == 1)
 				return true;
 			return false;
@@ -51,7 +51,7 @@ public class GiftServiceImpl implements GiftService {
 	@Transactional(readOnly=false, propagation=Propagation.REQUIRED)
 	public boolean resetGiftCount(int iid) {
 		
-		int result = this.itemMapper.resetGiftCount(iid);
+		int result = this.programMapper.resetGiftCount(iid);
 		if(result == 1)
 			return true;
 		return false;

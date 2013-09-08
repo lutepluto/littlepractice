@@ -16,7 +16,8 @@ public class Item implements Serializable {
 	private Date item_date;
 	private int item_collection;
 	
-	private Program program;
+	private Image image;
+	private Host host;
 	
 	public int getItem_id() {
 		return item_id;
@@ -66,10 +67,16 @@ public class Item implements Serializable {
 	public void setItem_collection(int item_collection) {
 		this.item_collection = item_collection;
 	}
-	public Program getProgram() {
-		return program;
+	public Image getImage() {
+		return this.image;
 	}
-	public void setProgram(Program program) {
-		this.program = program;
+	public void setImage(Image image) {
+		this.image = image;
+	}
+	public Host getHost() {
+		return host;
+	}
+	public void setHost(Host host) {
+		this.host = host;
 	}
 }

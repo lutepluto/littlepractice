@@ -1,13 +1,15 @@
 package jiecao.server.service;
 
+import java.util.List;
+
 import jiecao.server.domain.Program;
 
 public interface ProgramService {
 	
-	//获取正在直播的节目信息
-	public Program getLiveProgram();
+	public Program getLiveItem();
 	
-	//获取即将播出的节目信息
-	public Program getUpcomingProgram();
+	public Program getUpcomingItem();
 	
+	public List<Program> getCollectedItemsList();
+
 }

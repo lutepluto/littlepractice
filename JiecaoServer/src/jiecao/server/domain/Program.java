@@ -2,6 +2,7 @@ package jiecao.server.domain;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.List;
 
 public class Program implements Serializable {
 
@@ -12,6 +13,8 @@ public class Program implements Serializable {
 	private String program_description;
 	private Time program_stime;
 	private Time program_etime;
+	
+	private List<Item> items;
 	
 	public void setProgram_id(int program_id){
 		this.program_id = program_id;
@@ -45,11 +48,21 @@ public class Program implements Serializable {
 		return this.program_stime;
 	}
 	
-	public void setProgram_duration(Time program_etime){
+	public void setProgram_etime(Time program_etime) {
 		this.program_etime = program_etime;
 	}
 	
 	public Time getProgram_etime(){
 		return this.program_etime;
 	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
+	
 }

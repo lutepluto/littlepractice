@@ -23,6 +23,7 @@
 			h.host_description,
 			h.host_head_url,
 			img.image_id,
+			img.image_url,
 			img.image_name
 		from program p
 			inner join item i on p.program_id = i.item_pid
@@ -57,6 +58,7 @@
 			h.host_description,
 			h.host_head_url,
 			img.image_id,
+			img.image_url,
 			img.image_name
 		from program p
 			inner join item i on p.program_id = i.item_pid
@@ -89,6 +91,7 @@
 			h.host_description,
 			h.host_head_url,
 			img.image_id,
+			img.image_url,
 			img.image_name
 		from program p
 			inner join item i on p.program_id = i.item_pid
@@ -118,6 +121,7 @@
 			</association>
 			<association property="image" javaType="jiecao.server.domain.Image">
 				<id property="image_id" column="image_id"/>
+				<result property="image_url" column="image_url"/>
 				<result property="image_name" column="image_name"/>
 			</association>
 		</collection>

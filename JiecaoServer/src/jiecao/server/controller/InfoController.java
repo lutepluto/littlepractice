@@ -3,9 +3,7 @@ package jiecao.server.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +11,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import jiecao.server.domain.Host;
-import jiecao.server.domain.Image;
-import jiecao.server.domain.Item;
 import jiecao.server.domain.Program;
 import jiecao.server.service.ImageService;
 import jiecao.server.service.ProgramService;
@@ -73,13 +69,14 @@ public class InfoController {
 		return response;
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/image/{imgName:.*}.{extension:[a-z]*}")
-	public ResponseEntity<byte[]> getImagebyName(@PathVariable("imgName") String imgName, 
-			@PathVariable("extension") String extension, HttpServletRequest request) throws IOException{
+	@RequestMapping(method=RequestMethod.GET, value="/resources/{imgType:.*}/{imgName:.*}.{extension:[a-z]*}")
+	public ResponseEntity<byte[]> getImagebyName(@PathVariable("imgType") String imgType,
+			@PathVariable("imgName") String imgName, @PathVariable("extension") String extension,
+			HttpServletRequest request) throws IOException{
 		ServletContext servletContext = request.getSession().getServletContext();
 		String realPath = servletContext.getRealPath("/");
 		String fileName = imgName + "." + extension;
-		String filePath = realPath + "resources\\item\\" + fileName;
+		String filePath = realPath + "resources\\" + imgType + "\\" + fileName;
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Type", "image/"+extension);

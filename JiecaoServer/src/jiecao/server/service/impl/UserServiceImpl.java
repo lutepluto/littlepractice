@@ -40,8 +40,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUserSid(User user) {
-		this.userMapper.updateUserSid(user);
+	public void updateUserSid(String newSid, int uid) {
+		this.userMapper.updateUserSid(newSid, uid);
 	}
 	
 	public User getUserBySid(String sid){
@@ -56,11 +56,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean userLogin(User user) {
 		User u = null;
-		System.out.println("---000");
+		
 		u = this.getUserBySnsIdAndType(user.getSns_type(), user.getSns_id());
 		if(u != null ){
-			if(u.getSid() != user.getSid()){
-				this.updateUserSid(user);
+			//System.out.println(u.getSid() + "------" + user.getSid());
+			if(!u.getSid().equals(user.getSid())){
+				System.out.println("in update");
+				this.updateUserSid(user.getSid(), u.getUid());
+				System.out.println(u.getSid() + "------" + user.getSid());
+				System.out.println("uid in u is " + u.getUid() + "---- uid in user " + user.getUid());
 			}
 		}else{
 			int result = userMapper.insertUser(user);

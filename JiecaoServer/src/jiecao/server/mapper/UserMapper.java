@@ -12,7 +12,7 @@ public interface UserMapper {
 	
 	public int insertUser(User user);
 	
-	public boolean updateUserSid(User user);
+	public boolean updateUserSid(String newSid, int uid);
 	
 	public User getUserBySid(@Param("sid") String sid);
 	

@@ -44,7 +44,7 @@ public class RestfulTest {
 		if(user != null){
 			if(user.getSid() != u.getSid()){
 				user.setSid(u.getSid());
-				userMapper.updateUserSid(user);
+				userMapper.updateUserSid(user.getSid(), user.getUid());
 			}
 			response.put("success", "true");
 			response.put("sid", user.getSid().toString());

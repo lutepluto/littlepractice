@@ -12,15 +12,13 @@
 	
 	<insert id="insertUser" parameterType="jiecao.server.domain.User" 
 		useGeneratedKeys="true" keyProperty="uid">
-		INSERT INTO user (sid,sns_id,nickname,description,profile_image_url,gender,user_type,
+		INSERT INTO user (sid,sns_id,nickname,description,profile_image_url,gender,
 		sns_type) values (#{sid},#{sns_id},#{nickname}, #{description},#{profile_image_url},
-		#{gender},#{user_type},#{sns_type})
+		#{gender},#{sns_type})
 	</insert>
 	
 	<update id="updateUserSid" parameterType="jiecao.server.domain.User">
-		UPDATE user set
-			sid = #{sid}
-		WHERE uid = #{uid}
+		update user set	sid = #{0} where uid = #{1}
 	</update>
 	
 	<select id="getUserBySid" parameterType="String" resultType="jiecao.server.domain.User">

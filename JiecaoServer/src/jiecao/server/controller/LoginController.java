@@ -29,7 +29,7 @@ public class LoginController {
 	
 	@RequestMapping(method=RequestMethod.POST, value="/login")
 	@ResponseBody
-	public Object login(/*HttpSession httpSession,*/@RequestBody User user){
+	public Object login(@RequestBody User user){
 		
 		Map<String, Object> response = new HashMap<String, Object>();
 		
@@ -37,22 +37,16 @@ public class LoginController {
 		if(isAuthenticated){
 
 			User u = userService.getUserBySnsIdAndType(user.getSns_type(), user.getSns_id());
+			System.out.println(u.getSid());
 			response.put("status", 0);
 			response.put("uid", u.getUid());
-			response.put("sid", u.getSid());
-			
-			//List<Image> selections = selectionImageService.getSelectionImageList(); 
-			//response.put("selections", selections);
-			
-			//Image live = liveImageService.getNewestLiveImage(0);
-			//response.put("live", live);
-			
+			response.put("sid", u.getSid());	
+			response.put("user_type", u.getUser_type());
 		}else{
 			response.put("status", 1);
 			response.put("uid", null);
 			response.put("sid", null);
-			response.put("selections", null);
-			response.put("live", null);
+			response.put("user_type", null);
 		}
 		return response;
 	}

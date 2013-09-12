@@ -11,7 +11,7 @@ public interface UserService {
 	
 	void updateUser(User user);
 	
-	void updateUserSid(User user);
+	void updateUserSid(String newSid, int uid);
 	
 	User getUserBySid(String sid);
 	
